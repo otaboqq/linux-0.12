@@ -28,11 +28,11 @@ chr_drv.a: $(OBJS)
 	$(AR) rcs chr_drv.a $(OBJS)
 	@sync
 
-keyboard.s: keyboard.S
-	$(CPP) -traditional keyboard.S -o keyboard.s
+keyboard.ss: keyboard.S
+	$(CPP) -traditional keyboard.S -o keyboard.ss
 
 clean:
-	rm -f core *.o *.a tmp_make keyboard.s
+	rm -f core *.o *.a tmp_make keyboard.ss
 	for i in *.c;do rm -f `basename $$i .c`.s;done
 
 dep:
