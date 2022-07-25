@@ -111,23 +111,23 @@ fs/fs.o:
 lib/lib.a:
 	@(cd lib; make)
 
-boot/setup: boot/setup.s
-	$(AS86) -o boot/setup.o boot/setup.s
+boot/setup: boot/setup.ss
+	$(AS86) -o boot/setup.o boot/setup.ss
 	$(LD86) -s -o boot/setup boot/setup.o
 
-boot/setup.s:	boot/setup.S include/linux/config.h
-	$(CPP) -traditional boot/setup.S -o boot/setup.s
+boot/setup.ss:	boot/setup.S include/linux/config.h
+	$(CPP) -traditional boot/setup.S -o boot/setup.ss
 
-boot/bootsect.s:	boot/bootsect.S include/linux/config.h
-	$(CPP) -traditional boot/bootsect.S -o boot/bootsect.s
+boot/bootsect.ss:	boot/bootsect.S include/linux/config.h
+	$(CPP) -traditional boot/bootsect.S -o boot/bootsect.ss
 
-boot/bootsect:	boot/bootsect.s
-	$(AS86) -o boot/bootsect.o boot/bootsect.s
+boot/bootsect:	boot/bootsect.ss
+	$(AS86) -o boot/bootsect.o boot/bootsect.ss
 	$(LD86) -s -o boot/bootsect boot/bootsect.o
 
 clean:
 	rm -f Image System.map tmp_make core boot/bootsect boot/setup \
-		boot/bootsect.s boot/setup.s
+		boot/bootsect.ss boot/setup.ss
 	rm -f init/*.o tools/system tools/build boot/*.o
 	(cd mm;make clean)
 	(cd fs;make clean)
